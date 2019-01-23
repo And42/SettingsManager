@@ -31,7 +31,7 @@ namespace SettingsManager
 
                 if (methodName.StartsWith("set_", StringComparison.Ordinal))
                 {
-                    T model = (T) invocation.InvocationTarget;
+                    T model = (T) invocation.Proxy;
                     model.OnPropertyChanged(methodName.Substring(4));
                     SaveModel(model);
                 }
