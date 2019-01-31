@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Castle.DynamicProxy;
+using LongPaths.Logic;
 
 // ReSharper disable JoinNullCheckWithUsage
 
@@ -43,7 +44,7 @@ namespace SettingsManager
                     return;
 
                 CheckSettingsFileDir();
-                File.WriteAllText(_filePath, _modelProcessor.SaveModelToString(model), Encoding.UTF8);
+                LFile.WriteAllText(_filePath, _modelProcessor.SaveModelToString(model), Encoding.UTF8);
             }
 
             private void CheckSettingsFileDir()
@@ -99,8 +100,8 @@ namespace SettingsManager
                     );
                 }
 
-                if (File.Exists(_filePath))
-                    return _modelProcessor.LoadModelFromString<T>(File.ReadAllText(_filePath, Encoding.UTF8));
+                if (LFile.Exists(_filePath))
+                    return _modelProcessor.LoadModelFromString<T>(LFile.ReadAllText(_filePath, Encoding.UTF8));
 
                 return new T();
             }

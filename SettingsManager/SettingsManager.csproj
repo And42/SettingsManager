@@ -56,5 +56,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LongPaths\LongPaths\LongPaths.csproj">
+      <Project>{593a2d73-7513-498e-8f8a-554742c92ed7}</Project>
+      <Name>LongPaths</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
