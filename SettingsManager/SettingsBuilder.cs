@@ -51,8 +51,8 @@ namespace SettingsManager
             {
                 string directory = Path.GetDirectoryName(_filePath);
 
-                if (directory != null && !Directory.Exists(directory))
-                    Directory.CreateDirectory(directory);
+                if (directory != null && !LDirectory.Exists(directory))
+                    LDirectory.CreateDirectory(directory);
             }
         }
 
