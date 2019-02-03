@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using Castle.DynamicProxy;
 using LongPaths.Logic;
@@ -60,6 +62,7 @@ namespace SettingsManager
 
         private IModelProcessor _modelProcessor;
         private string _filePath;
+        private bool _virtualCheckEnabled = true;
 
         public SettingsBuilder<T> WithProcessor(IModelProcessor modelProcessor)
         {
@@ -73,8 +76,30 @@ namespace SettingsManager
             return this;
         }
 
+        public SettingsBuilder<T> DisableVirtualCheck()
+        {
+            _virtualCheckEnabled = false;
+            return this;
+        }
+
         public T Build()
         {
+            if (_virtualCheckEnabled)
+            {
+                PropertyInfo[] properties = typeof(T).GetProperties();
+                PropertyInfo[] notVirtual = properties.Where(prop => prop.GetMethod.IsFinal).ToArray();
+
+                if (notVirtual.Length > 0)
+                {
+                    throw new Exception(
+                        $"Some of the properties of `{typeof(T).Name}` are not virtual. " +
+                        $"If property is not virtual settings proxy will not work. " +
+                        $"Make sure this is an expected behaviour. " +
+                        $"Non virtual properties: [{string.Join(", ", notVirtual.Select(it => $"`{it.Name}`"))}]"
+                    );
+                }
+            }
+
             T initialModel = LoadInitialModel();
 
             T proxy = 
