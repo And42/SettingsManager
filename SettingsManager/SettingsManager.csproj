@@ -3,13 +3,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Andrey Skobtsov</Authors>
-    <Copyright>© Andrey Skobtsov, 2018</Copyright>
+    <Copyright>Andrey Skobtsov</Copyright>
     <Version>1.1.4.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>SettingsManager</Title>
+    <Description>Settings provider based on class's properties</Description>
+    <PackageProjectUrl>https://github.com/And42/SettingsManager</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/And42/SettingsManager</RepositoryUrl>
+    <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <FileVersion>1.1.4.0</FileVersion>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="5.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <None Include="../LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
